@@ -161,6 +161,7 @@ void drawGoals()
 }
 
 void myDraw() {
+
 	TriangularPrism Tri(-20, 0, 20, 1, 1, 50, 2, 0, 1, 0);
 	Tri.draw();
 	RectangularPrism Rect(20, 0, 20, 1, 2, 3, 1, 0, 0);
