@@ -63,7 +63,7 @@ void TriangularPrism::draw()
 
 	glPushMatrix();
 	glTranslated(x,y,z);
-	glRotated(-45, 0, 1, 0);
+	//glRotated(-45, 0, 1, 0);
 	//glTranslated(-s1 / 2, 0, -d / 2);
 	x = -s1 / 2, y = 0, z = -d / 2;
 
@@ -73,6 +73,12 @@ void TriangularPrism::draw()
 	glVertex3d(x, y, z);
 	glVertex3d(x + s1, y, z);
 	glVertex3d(x + s2 * cos(t), y + s2 * sin(t), z);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3d(x, y, z + d);
+	glVertex3d(x + s1, y, z + d);
+	glVertex3d(x + s2 * cos(t), y + s2 * sin(t), z + d);
 	glEnd();
 
 	glBegin(GL_QUADS);

@@ -14,5 +14,8 @@ class MyCar : public Vehicle
 public:
 	MyCar();
 	void draw();
+	void getAngleRecord();
+private:
+	double angleRec;
 };
 #endif

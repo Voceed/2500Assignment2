@@ -113,7 +113,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
+	vehicle = new MyCar();
 
 
 	// add test obstacles
@@ -217,7 +217,7 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
-	myDraw();
+	//myDraw();
 	glutSwapBuffers();
 };
 
@@ -285,7 +285,7 @@ void idle() {
 	if (KeyManager::get()->isAsciiKeyPressed(' ')) {
 		Camera::get()->strafeUp();
 	}
-
+	
 	speed = 0;
 	steering = 0;
 
@@ -319,7 +319,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
