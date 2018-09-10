@@ -79,7 +79,7 @@ void MyCar::draw() {
 	Hub2.draw();
 	glPopMatrix();
 
-	//Front Left
+	//Front Right
 	glPushMatrix();
 	positionInGL();
 	glTranslated(0.8, 0.0, 1.15);
@@ -92,7 +92,7 @@ void MyCar::draw() {
 	Hub3.draw();
 	glPopMatrix();
 
-	//Front Right
+	//Front Left
 	glPushMatrix();
 	positionInGL();
 	glTranslated(0.8, 0.0, -1.15);

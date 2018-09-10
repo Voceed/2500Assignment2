@@ -29,6 +29,7 @@
     <ClInclude Include="MyCar.hpp" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="ObstacleManager.hpp" />
+    <ClInclude Include="OtherCar.hpp" />
     <ClInclude Include="Quaternion.hpp" />
     <ClInclude Include="RectangularPrism.hpp" />
     <ClInclude Include="RemoteDataManager.hpp" />
@@ -50,6 +51,7 @@
     <ClCompile Include="MyCar.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
+    <ClCompile Include="OtherCar.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RectangularPrism.cpp" />
     <ClCompile Include="RemoteDataManager.cpp" />

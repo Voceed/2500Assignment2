@@ -95,5 +95,4 @@ void RectangularPrism::draw()
 	glVertex3d(x, y, z + h);
 	glEnd();
 	glPopMatrix();
-	//glTranslated(3, 4, 5);
 }

@@ -44,6 +44,7 @@
 #include "Triangular.hpp"
 #include "Cylinder.hpp"
 #include "MyCar.hpp"
+#include "OtherCar.hpp"
 
 void display();
 void reshape(int width, int height);
@@ -332,6 +333,175 @@ void idle() {
 					// student code goes here
 					//
 
+					//==============Bodies
+					ShapeInit Body1;
+					Body1.params.rect.xlen = 3.2;
+					Body1.params.rect.ylen = 0.8;
+					Body1.params.rect.zlen = 1.6;
+					Body1.rotation = MyCar().getRotation();
+					Body1.rgb[0] = 1;
+					Body1.rgb[1] = 0;
+					Body1.rgb[2] = 0;
+					Body1.type = RECTANGULAR_PRISM;
+					Body1.xyz[0] = 0;
+					Body1.xyz[1] = 0.4;
+					Body1.xyz[2] = 0;
+					vm.shapes.push_back(Body1);
+
+					ShapeInit Body2;
+					Body2.params.rect.xlen = 3.2;
+					Body2.params.rect.ylen = 0.8;
+					Body2.params.rect.zlen = 1.6;
+					Body2.rotation = MyCar().getRotation();
+					Body2.rgb[0] = 1;
+					Body2.rgb[1] = 1;
+					Body2.rgb[2] = 1;
+					Body2.type = RECTANGULAR_PRISM;
+					Body2.xyz[0] = 0;
+					Body2.xyz[1] = 1.2;
+					Body2.xyz[2] = 0;
+					vm.shapes.push_back(Body2);
+
+					//==============Tops
+					ShapeInit trigTop;
+					trigTop.params.tri.alen = 1.6;
+					trigTop.params.tri.blen = 1.6;
+					trigTop.params.tri.angle = 60;
+					trigTop.params.tri.depth = 1.6;
+					trigTop.rgb[0] = 0;
+					trigTop.rgb[1] = 0;
+					trigTop.rgb[2] = 0.7;
+					trigTop.rotation = MyCar().getRotation();
+					trigTop.type = TRIANGULAR_PRISM;
+					trigTop.xyz[0] = -0.8;
+					trigTop.xyz[1] = 2;
+					trigTop.xyz[2] = 0;
+					vm.shapes.push_back(trigTop);
+
+					ShapeInit trapTop;
+					trapTop.params.trap.alen = 1.6;
+					trapTop.params.trap.aoff = 0.4;
+					trapTop.params.trap.blen = 0.8;
+					trapTop.params.trap.depth = 1.6;
+					trapTop.params.trap.height = 0.8;
+					trapTop.rgb[0] = 1;
+					trapTop.rgb[1] = 0;
+					trapTop.rgb[2] = 0;
+					trapTop.rotation = MyCar().getRotation();
+					trapTop.type = TRAPEZOIDAL_PRISM;
+					trapTop.xyz[0] = 0.8;
+					trapTop.xyz[1] = 2;
+					trapTop.xyz[2] = 0;
+					vm.shapes.push_back(trapTop);
+
+					//=================Rods
+					ShapeInit Rod1;
+					Rod1.params.cyl.depth = 2.2;
+					Rod1.params.cyl.radius = 0.05;
+					Rod1.params.cyl.isRolling = false;
+					Rod1.params.cyl.isSteering = false;
+					Rod1.rgb[0] = 0;
+					Rod1.rgb[1] = 1;
+					Rod1.rgb[2] = 0;
+					Rod1.rotation = MyCar().getRotation();
+					Rod1.type = CYLINDER;
+					Rod1.xyz[0] = -0.8;
+					Rod1.xyz[1] = 0.3;
+					Rod1.xyz[2] = 0;
+					vm.shapes.push_back(Rod1);
+
+					ShapeInit Rod2;
+					Rod2.params.cyl.depth = 2.2;
+					Rod2.params.cyl.radius = 0.05;
+					Rod2.params.cyl.isRolling = false;
+					Rod2.params.cyl.isSteering = false;
+					Rod2.rgb[0] = 0;
+					Rod2.rgb[1] = 1;
+					Rod2.rgb[2] = 0;
+					Rod2.rotation = MyCar().getRotation();
+					Rod2.type = CYLINDER;
+					Rod2.xyz[0] = 0.8;
+					Rod2.xyz[1] = 0.3;
+					Rod2.xyz[2] = 0;
+					vm.shapes.push_back(Rod2);
+
+					//===========Wheels
+					ShapeInit Wheel1;
+					Wheel1.params.cyl.depth = 0.4;
+					Wheel1.params.cyl.radius = 0.35;
+					Wheel1.params.cyl.isRolling = true;
+					Wheel1.params.cyl.isSteering = false;
+					Wheel1.rgb[0] = 0;
+					Wheel1.rgb[1] = 1;
+					Wheel1.rgb[2] = 1;
+					Wheel1.rotation = MyCar().getRotation();
+					Wheel1.type = CYLINDER;
+					Wheel1.xyz[0] = -0.8;
+					Wheel1.xyz[1] = 0;
+					Wheel1.xyz[2] = 1.15;
+					vm.shapes.push_back(Wheel1);
+
+					ShapeInit Wheel2;
+					Wheel2.params.cyl.depth = 0.4;
+					Wheel2.params.cyl.radius = 0.35;
+					Wheel2.params.cyl.isRolling = true;
+					Wheel2.params.cyl.isSteering = false;
+					Wheel2.rgb[0] = 0;
+					Wheel2.rgb[1] = 1;
+					Wheel2.rgb[2] = 1;
+					Wheel2.rotation = MyCar().getRotation();
+					Wheel2.type = CYLINDER;
+					Wheel2.xyz[0] = -0.8;
+					Wheel2.xyz[1] = 0;
+					Wheel2.xyz[2] = -1.15;
+					vm.shapes.push_back(Wheel2);
+
+					ShapeInit Wheel3;//=4 in MyCar
+					Wheel3.params.cyl.depth = 0.4;
+					Wheel3.params.cyl.radius = 0.35;
+					Wheel3.params.cyl.isRolling = true;
+					Wheel3.params.cyl.isSteering = true;
+					Wheel3.rgb[0] = 0;
+					Wheel3.rgb[1] = 1;
+					Wheel3.rgb[2] = 1;
+					Wheel3.rotation = MyCar().getRotation();
+					Wheel3.type = CYLINDER;
+					Wheel3.xyz[0] = 0.8;
+					Wheel3.xyz[1] = 0;
+					Wheel3.xyz[2] = 1.15;
+					vm.shapes.push_back(Wheel3);
+
+					ShapeInit Wheel4;//=3 in MyCar
+					Wheel4.params.cyl.depth = 0.4;
+					Wheel4.params.cyl.radius = 0.35;
+					Wheel4.params.cyl.isRolling = true;
+					Wheel4.params.cyl.isSteering = true;
+					Wheel4.rgb[0] = 0;
+					Wheel4.rgb[1] = 1;
+					Wheel4.rgb[2] = 1;
+					Wheel4.rotation = MyCar().getRotation();
+					Wheel4.type = CYLINDER;
+					Wheel4.xyz[0] = 0.8;
+					Wheel4.xyz[1] = 0;
+					Wheel4.xyz[2] = -1.15;
+					vm.shapes.push_back(Wheel4);
+
+					//==============BackWheel
+					ShapeInit Wheel5;//=backWheel in MyCar
+					Wheel5.params.cyl.depth = 0.4;
+					Wheel5.params.cyl.radius = 0.4;
+					Wheel5.params.cyl.isRolling = false;
+					Wheel5.params.cyl.isSteering = false;
+					Wheel5.rgb[0] = 1;
+					Wheel5.rgb[1] = 1;
+					Wheel5.rgb[2] = 0;
+					Wheel5.rotation = MyCar().getRotation();
+					Wheel5.type = CYLINDER;
+					Wheel5.xyz[0] = -1.8;
+					Wheel5.xyz[1] = 0.8;
+					Wheel5.xyz[2] = 0;
+					vm.shapes.push_back(Wheel5);
+
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
@@ -366,11 +536,13 @@ void idle() {
 						VehicleModel vm = models[i];
 
 						// uncomment the line below to create remote vehicles
-						//otherVehicles[vm.remoteID] = new MyVehicle();
+						otherVehicles[vm.remoteID] = new OtherCar(vm);
 
 						//
 						// more student code goes here
 						//
+						
+
 					}
 					break;
 				}

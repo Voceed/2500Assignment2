@@ -57,8 +57,10 @@ void TrapezoidalPrism::draw() {
 	double d = Depth;
 	double a = offset;
 	glPushMatrix();
+	glRotated(180, 0, 1, 0);//????????????????
 	glTranslated(-b / 2, 0, d / 2);
 	glColor3f(red, green, blue);
+	
 
 	glBegin(GL_QUADS);
 	glVertex3d(x, y, z);
