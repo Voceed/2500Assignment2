@@ -101,7 +101,7 @@ void TrapezoidalPrism::draw() {
 	glVertex3d(x, y, z - d);
 	glVertex3d(x + b, y, z - d);
 	glVertex3d(x + t, y + h, z - d);
-	glVertex3d(x + a, y, z - d);//back face
+	glVertex3d(x + a, y + h, z - d);//back face
 	glEnd();
 	glPopMatrix();
 }

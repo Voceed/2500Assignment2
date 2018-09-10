@@ -495,7 +495,7 @@ void idle() {
 					Wheel5.rgb[0] = 1;
 					Wheel5.rgb[1] = 1;
 					Wheel5.rgb[2] = 0;
-					Wheel5.rotation = MyCar().getRotation();
+					Wheel5.rotation = MyCar().getRotation() + 90;
 					Wheel5.type = CYLINDER;
 					Wheel5.xyz[0] = -1.8;
 					Wheel5.xyz[1] = 0.8;

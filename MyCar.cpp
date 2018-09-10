@@ -57,6 +57,15 @@ void MyCar::draw() {
 	glPopMatrix();
 
 	//=======================Wheels
+	/*glPushMatrix();
+	positionInGL();
+	glTranslated(-0.8, 0.0, 1.15);
+	glTranslated(0.35*sin(angleRec), -0.35 + 0.7*sin(angleRec), 0);
+	glRotated(angleRec, 0, 0, 1);
+	Cylinder Wheel1(0, 0, 0, 0.35, 0.35, 0.4, 5, 1, 1, 0, 1, 1);
+	Wheel1.draw();
+	glPopMatrix();*/
+
 	glPushMatrix();
 	positionInGL();
 	glTranslated(-0.8, 0.0, 1.15);
@@ -117,6 +126,6 @@ void MyCar::draw() {
 }
 
 void MyCar::getAngleRecord() {
-	double omega = (speed / 0.35)*(2.75);
+	double omega = (speed / 0.35)*(2.25);
 	angleRec = angleRec - omega;
 }
