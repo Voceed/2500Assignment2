@@ -48,8 +48,11 @@ void RectangularPrism::SetZlin(double z)
 
 void RectangularPrism::draw()
 {
-	glPushMatrix();
 	double l = x_length, w = y_length, h = z_length;
+
+	glPushMatrix();
+	glTranslated(x, y, z);
+	glRotated(180, 0, 1, 0);//AXIS FIXING
 	glTranslated(-l / 2, 0, -h / 2);
 	glColor3f(red, green, blue);
 

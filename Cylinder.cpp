@@ -82,9 +82,7 @@ void Cylinder::SetLoops(double loop)
 void Cylinder::draw()
 {
 	glPushMatrix();
-	//glTranslated(0, 0, 0);
-	//glRotated(-90, 0, 1, 0);
-	glTranslated(x,y,z);
+	glTranslated(x, y, z);
 
 	double top = Top, base = Base, d = Depth;
 	double slice = Slices, stack = Stacks, loop = Loops;

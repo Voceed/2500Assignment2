@@ -12,7 +12,7 @@ OtherCar::OtherCar(VehicleModel _vm) {
 void OtherCar::draw() {
 	vector<ShapeInit>::iterator shapeIt;
 
-	for (shapeIt = vm.shapes.begin(); shapeIt != vm.shapes.end(); ++shapeIt) {
+	for (shapeIt = vm.shapes.begin(); shapeIt != vm.shapes.end(); shapeIt++) {
 		switch (shapeIt->type) {
 
 		case (RECTANGULAR_PRISM):
@@ -35,7 +35,7 @@ void OtherCar::draw() {
 			positionInGL();
 			glRotated(180, 0, 1, 0);
 			glTranslated(-shapeIt->xyz[0], shapeIt->xyz[1], shapeIt->xyz[2]);
-			//glRotated(shapeIt->rotation, 0, 1, 0);
+			glRotated(shapeIt->rotation, 0, 1, 0);
 			TriangularPrism trig(0,0,0, shapeIt->params.tri.alen, shapeIt->params.tri.blen, shapeIt->params.tri.angle, shapeIt->params.tri.depth,
 				shapeIt->rgb[0], shapeIt->rgb[1], shapeIt->rgb[2]);
 			trig.draw();
@@ -67,7 +67,6 @@ void OtherCar::draw() {
 			}
 			Cylinder cy(0,0,0, shapeIt->params.cyl.radius, shapeIt->params.cyl.radius, shapeIt->params.cyl.depth, 50, 1, 1, 
 				shapeIt->rgb[0], shapeIt->rgb[1], shapeIt->rgb[2]);
-			
 			cy.draw();
 			glPopMatrix();
 			break;
