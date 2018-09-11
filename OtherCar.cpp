@@ -21,8 +21,10 @@ void OtherCar::draw() {
 			positionInGL();
 			glRotated(180, 0, 1, 0);
 			glTranslated(-shapeIt->xyz[0], shapeIt->xyz[1], shapeIt->xyz[2]);
+			glRotated(shapeIt->rotation, 0, 1, 0);
 			RectangularPrism rect(0,0,0, shapeIt->params.rect.xlen, shapeIt->params.rect.ylen, shapeIt->params.rect.zlen,
 				shapeIt->rgb[0], shapeIt->rgb[1], shapeIt->rgb[2]);
+
 			rect.draw();
 			glPopMatrix();
 			break;
@@ -33,6 +35,7 @@ void OtherCar::draw() {
 			positionInGL();
 			glRotated(180, 0, 1, 0);
 			glTranslated(-shapeIt->xyz[0], shapeIt->xyz[1], shapeIt->xyz[2]);
+			//glRotated(shapeIt->rotation, 0, 1, 0);
 			TriangularPrism trig(0,0,0, shapeIt->params.tri.alen, shapeIt->params.tri.blen, shapeIt->params.tri.angle, shapeIt->params.tri.depth,
 				shapeIt->rgb[0], shapeIt->rgb[1], shapeIt->rgb[2]);
 			trig.draw();
@@ -45,6 +48,7 @@ void OtherCar::draw() {
 			positionInGL();
 			glRotated(180, 0, 1, 0);
 			glTranslated(-shapeIt->xyz[0], shapeIt->xyz[1], shapeIt->xyz[2]);
+			glRotated(shapeIt->rotation, 0, 1, 0);
 			TrapezoidalPrism trap(0,0,0, shapeIt->params.trap.height, shapeIt->params.trap.blen, shapeIt->params.trap.alen, shapeIt->params.trap.depth, shapeIt->params.trap.aoff,
 				shapeIt->rgb[0], shapeIt->rgb[1], shapeIt->rgb[2]);
 			trap.draw();
@@ -57,6 +61,7 @@ void OtherCar::draw() {
 			positionInGL();
 			glRotated(180, 0, 1, 0);
 			glTranslated(-shapeIt->xyz[0], shapeIt->xyz[1], shapeIt->xyz[2]);
+			glRotated(shapeIt->rotation, 0, 1, 0);
 			if (shapeIt->params.cyl.isSteering == true) {
 				glRotated(-steering, 0, 1, 0);
 			}
