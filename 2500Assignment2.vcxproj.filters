@@ -72,6 +72,12 @@
     <ClInclude Include="OtherCar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="XBoxController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XInputWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -132,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OtherCar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XBoxController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -45,6 +45,8 @@
 #include "Cylinder.hpp"
 #include "MyCar.hpp"
 #include "OtherCar.hpp"
+#include "XBoxController.h"
+
 
 void display();
 void reshape(int width, int height);
@@ -61,6 +63,7 @@ void motion(int x, int y);
 
 using namespace std;
 using namespace scos;
+using namespace GamePad;
 
 // Used to store the previous mouse location so we
 //   can calculate relative mouse movement.
@@ -262,47 +265,66 @@ double getTime()
 }
 
 void idle() {
+	XInputWrapper temp_xinput = XInputWrapper::XInputWrapper();
+	XInputWrapper *xinput = &temp_xinput;
+	XBoxController xbox(xinput, 0);
+	bool X, Y, A, B;
+	X = Y = A = B = false;
+	if (xbox.IsConnected()) {
+		if (xbox.PressedX()) {
+			X = true;
+		}
+		if (xbox.PressedB()) {
+			B = true;
+		}
+		if (xbox.PressedY()) {
+			Y = true;
+		}
+		if (xbox.PressedA()) {
+			A = true;
+		}
+	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('a')) {
+	if (KeyManager::get()->isAsciiKeyPressed('a') || xbox.PressedLeftDpad()) {
 		Camera::get()->strafeLeft();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('c')) {
+	if (KeyManager::get()->isAsciiKeyPressed('c') || xbox.PressedLeftShoulder()) {
 		Camera::get()->strafeDown();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('d')) {
+	if (KeyManager::get()->isAsciiKeyPressed('d') || xbox.PressedRightDpad()) {
 		Camera::get()->strafeRight();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('s')) {
+	if (KeyManager::get()->isAsciiKeyPressed('s') || xbox.PressedDownDpad()) {
 		Camera::get()->moveBackward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('w')) {
+	if (KeyManager::get()->isAsciiKeyPressed('w') || xbox.PressedUpDpad()) {
 		Camera::get()->moveForward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed(' ')) {
+	if (KeyManager::get()->isAsciiKeyPressed(' ') || xbox.PressedRightShoulder()) {
 		Camera::get()->strafeUp();
 	}
 	
 	speed = 0;
 	steering = 0;
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
+	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT) || X == true) {
 		steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
+	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)|| B == true) {
 		steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP)) {
+	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP) || Y == true) {
 		speed = Vehicle::MAX_FORWARD_SPEED_MPS;
 	}
 
-	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN)) {
+	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN) || A == true) {
 		speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
 	}
 
@@ -333,12 +355,15 @@ void idle() {
 					// student code goes here
 					//
 
+					//============myCar_Copy
+					MyCar myCopy = MyCar::MyCar();
+
 					//==============Bodies
 					ShapeInit Body1;
 					Body1.params.rect.xlen = 3.2;
 					Body1.params.rect.ylen = 0.8;
 					Body1.params.rect.zlen = 1.6;
-					Body1.rotation = MyCar().getRotation();
+					Body1.rotation = myCopy.getRotation();
 					Body1.rgb[0] = 1;
 					Body1.rgb[1] = 0;
 					Body1.rgb[2] = 0;
@@ -352,7 +377,7 @@ void idle() {
 					Body2.params.rect.xlen = 3.2;
 					Body2.params.rect.ylen = 0.8;
 					Body2.params.rect.zlen = 1.6;
-					Body2.rotation = MyCar().getRotation();
+					Body2.rotation = myCopy.getRotation();
 					Body2.rgb[0] = 1;
 					Body2.rgb[1] = 1;
 					Body2.rgb[2] = 1;
@@ -371,7 +396,7 @@ void idle() {
 					trigTop.rgb[0] = 0;
 					trigTop.rgb[1] = 0;
 					trigTop.rgb[2] = 0.7;
-					trigTop.rotation = MyCar().getRotation();
+					trigTop.rotation = myCopy.getRotation();
 					trigTop.type = TRIANGULAR_PRISM;
 					trigTop.xyz[0] = -0.8;
 					trigTop.xyz[1] = 2;
@@ -387,7 +412,7 @@ void idle() {
 					trapTop.rgb[0] = 1;
 					trapTop.rgb[1] = 0;
 					trapTop.rgb[2] = 0;
-					trapTop.rotation = MyCar().getRotation();
+					trapTop.rotation = myCopy.getRotation();
 					trapTop.type = TRAPEZOIDAL_PRISM;
 					trapTop.xyz[0] = 0.8;
 					trapTop.xyz[1] = 2;
@@ -403,7 +428,7 @@ void idle() {
 					Rod1.rgb[0] = 0;
 					Rod1.rgb[1] = 1;
 					Rod1.rgb[2] = 0;
-					Rod1.rotation = MyCar().getRotation();
+					Rod1.rotation = myCopy.getRotation();
 					Rod1.type = CYLINDER;
 					Rod1.xyz[0] = -0.8;
 					Rod1.xyz[1] = 0.3;
@@ -418,7 +443,7 @@ void idle() {
 					Rod2.rgb[0] = 0;
 					Rod2.rgb[1] = 1;
 					Rod2.rgb[2] = 0;
-					Rod2.rotation = MyCar().getRotation();
+					Rod2.rotation = myCopy.getRotation();
 					Rod2.type = CYLINDER;
 					Rod2.xyz[0] = 0.8;
 					Rod2.xyz[1] = 0.3;
@@ -426,15 +451,17 @@ void idle() {
 					vm.shapes.push_back(Rod2);
 
 					//===========Wheels
+					myCopy.setFourWheelsRad(1, 1, 0.35, 0.35);
+
 					ShapeInit Wheel1;
 					Wheel1.params.cyl.depth = 0.4;
-					Wheel1.params.cyl.radius = 0.35;
+					Wheel1.params.cyl.radius = myCopy.getBR();
 					Wheel1.params.cyl.isRolling = true;
 					Wheel1.params.cyl.isSteering = false;
 					Wheel1.rgb[0] = 0;
 					Wheel1.rgb[1] = 1;
 					Wheel1.rgb[2] = 1;
-					Wheel1.rotation = MyCar().getRotation();
+					Wheel1.rotation = myCopy.getRotation();
 					Wheel1.type = CYLINDER;
 					Wheel1.xyz[0] = -0.8;
 					Wheel1.xyz[1] = 0;
@@ -443,13 +470,13 @@ void idle() {
 
 					ShapeInit Wheel2;
 					Wheel2.params.cyl.depth = 0.4;
-					Wheel2.params.cyl.radius = 0.35;
+					Wheel2.params.cyl.radius = myCopy.getBL();
 					Wheel2.params.cyl.isRolling = true;
 					Wheel2.params.cyl.isSteering = false;
 					Wheel2.rgb[0] = 0;
 					Wheel2.rgb[1] = 1;
 					Wheel2.rgb[2] = 1;
-					Wheel2.rotation = MyCar().getRotation();
+					Wheel2.rotation = myCopy.getRotation();
 					Wheel2.type = CYLINDER;
 					Wheel2.xyz[0] = -0.8;
 					Wheel2.xyz[1] = 0;
@@ -458,13 +485,13 @@ void idle() {
 
 					ShapeInit Wheel3;//=4 in MyCar
 					Wheel3.params.cyl.depth = 0.4;
-					Wheel3.params.cyl.radius = 0.35;
+					Wheel3.params.cyl.radius = myCopy.getFL();
 					Wheel3.params.cyl.isRolling = true;
 					Wheel3.params.cyl.isSteering = true;
 					Wheel3.rgb[0] = 0;
 					Wheel3.rgb[1] = 1;
 					Wheel3.rgb[2] = 1;
-					Wheel3.rotation = MyCar().getRotation();
+					Wheel3.rotation = myCopy.getRotation();
 					Wheel3.type = CYLINDER;
 					Wheel3.xyz[0] = 0.8;
 					Wheel3.xyz[1] = 0;
@@ -473,13 +500,13 @@ void idle() {
 
 					ShapeInit Wheel4;//=3 in MyCar
 					Wheel4.params.cyl.depth = 0.4;
-					Wheel4.params.cyl.radius = 0.35;
+					Wheel4.params.cyl.radius = myCopy.getFR();
 					Wheel4.params.cyl.isRolling = true;
 					Wheel4.params.cyl.isSteering = true;
 					Wheel4.rgb[0] = 0;
 					Wheel4.rgb[1] = 1;
 					Wheel4.rgb[2] = 1;
-					Wheel4.rotation = MyCar().getRotation();
+					Wheel4.rotation = myCopy.getRotation();
 					Wheel4.type = CYLINDER;
 					Wheel4.xyz[0] = 0.8;
 					Wheel4.xyz[1] = 0;
@@ -495,7 +522,7 @@ void idle() {
 					Wheel5.rgb[0] = 1;
 					Wheel5.rgb[1] = 1;
 					Wheel5.rgb[2] = 0;
-					Wheel5.rotation = MyCar().getRotation() + 90;
+					Wheel5.rotation = myCopy.getRotation() + 90;
 					Wheel5.type = CYLINDER;
 					Wheel5.xyz[0] = -1.8;
 					Wheel5.xyz[1] = 0.8;
