@@ -14,10 +14,11 @@ class MyCar : public Vehicle
 public:
 	MyCar();
 	void draw();
-	void stackAngleRecord();
+	void stackAngleRecord();//calculate the current rotated angle with respect to z-axis
 	double getAngleRec() {
 		return angleRec;
 	}
+
 	void setFourWheelsRad(double _BR, double _BL, double _FR, double _FL) {
 		BR = _BR; BL = _BL; FR = _FR; FL = _FL;
 	}
@@ -28,6 +29,6 @@ public:
 	double getFL() { return FL; }
 private:
 	double angleRec;
-	double BR, BL, FR, FL;
+	double BR, BL, FR, FL;//wheels' radius
 };
 #endif

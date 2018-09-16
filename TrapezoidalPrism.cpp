@@ -62,47 +62,52 @@ void TrapezoidalPrism::draw() {
 	glTranslated(-b / 2, 0, d / 2);
 	glColor3f(red, green, blue);
 	
-
+	//Bottom face
 	glBegin(GL_QUADS);
 	glVertex3d(x, y, z);
 	glVertex3d(x + b, y, z);
 	glVertex3d(x + b, y, z - d);
-	glVertex3d(x, y, z - d);//bottom face
+	glVertex3d(x, y, z - d);
 	glEnd();
 
+	//Front face
 	glBegin(GL_QUADS);
 	glVertex3d(x, y, z);
 	glVertex3d(x + b, y, z);
 	glVertex3d(x + t, y + h, z);
-	glVertex3d(x + a, y + h, z);//front face
+	glVertex3d(x + a, y + h, z);
 	glEnd();
 
+	//Right face
 	glBegin(GL_QUADS);
 	glVertex3d(x + b, y, z);
 	glVertex3d(x + b, y, z - d);
 	glVertex3d(x + t, y + h, z - d);
-	glVertex3d(x + t, y + h, z);//Right face
+	glVertex3d(x + t, y + h, z);
 	glEnd();
 
+	//Left face
 	glBegin(GL_QUADS);
 	glVertex3d(x, y, z);
 	glVertex3d(x, y, z - d);
 	glVertex3d(x + a, y + h, z - d);
-	glVertex3d(x + a, y + h, z);//Left face
+	glVertex3d(x + a, y + h, z);
 	glEnd();
 
+	//Top face
 	glBegin(GL_QUADS);
 	glVertex3d(x + a, y + h, z);
 	glVertex3d(x + t, y + h, z);
 	glVertex3d(x + t, y + h, z - d);
-	glVertex3d(x + a, y + h, z - d);//Top face
+	glVertex3d(x + a, y + h, z - d);
 	glEnd();
 
+	//Back face
 	glBegin(GL_QUADS);
 	glVertex3d(x, y, z - d);
 	glVertex3d(x + b, y, z - d);
 	glVertex3d(x + t, y + h, z - d);
-	glVertex3d(x + a, y + h, z - d);//back face
+	glVertex3d(x + a, y + h, z - d);
 	glEnd();
 	glPopMatrix();
 }

@@ -11,6 +11,13 @@
 class OtherCar : public Vehicle
 {
 public:
+	//===================================//
+	//this constructor will take in		 //
+	//a vehicle model and the the draw() //
+	//function can use the data from	 //
+	//the take in model					 //
+	//===================================//
+
 	OtherCar(VehicleModel _vm);
 	void draw();
 private:

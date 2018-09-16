@@ -38,7 +38,7 @@
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
 
-//new
+//---Own header files and methods---//
 #include "RectangularPrism.hpp"
 #include "TrapezoidalPrism.hpp"
 #include "Triangular.hpp"
@@ -63,6 +63,10 @@ void motion(int x, int y);
 
 using namespace std;
 using namespace scos;
+
+//=================================================//
+//Gamepad namespace is required by xbox controller //
+//=================================================//
 using namespace GamePad;
 
 // Used to store the previous mouse location so we
@@ -163,6 +167,11 @@ void drawGoals()
 	}
 }
 
+//===========================================================//
+// This function will draw only shapes and static car shapes //
+// for the first part of the assignment,					 //
+// and it is called in display() function					 //
+//===========================================================//
 void myDraw() {
 
 	TriangularPrism Tri(-20, 0, 20, 1, 1, 50, 2, 0, 1, 0);
@@ -173,8 +182,6 @@ void myDraw() {
 	Trap.draw();
 	Cylinder Cy(-20, 0, -20, 2, 2, 4, 30, 1, 1, 1, 1, 1);
 	Cy.draw();
-	//Cylinder Wheel2(0, 0, 0, 10, 20, 20, 50, 5, 1, 1, 0, 0);
-	//Wheel2.draw();
 	MyCar car;
 	car.draw();
 	glEnd();
@@ -221,6 +228,7 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
+	//---myDraw is called here, uncomment to draw---//
 	//myDraw();
 	glutSwapBuffers();
 };
@@ -265,6 +273,14 @@ double getTime()
 }
 
 void idle() {
+	//==========================================//
+	//The xbox controller class need to be      //
+	//created first, then the extra own code    //
+	//in this function will be used to control  //
+	//the vehicle.								//
+	//==========================================//
+
+	//---OWN_CODE_START---//
 	XInputWrapper temp_xinput = XInputWrapper::XInputWrapper();
 	XInputWrapper *xinput = &temp_xinput;
 	XBoxController xbox(xinput, 0);
@@ -284,28 +300,48 @@ void idle() {
 			A = true;
 		}
 	}
+	//---OWN_CODE_END---//
 
-	if (KeyManager::get()->isAsciiKeyPressed('a') || xbox.PressedLeftDpad()) {
+	//---OWN_CODE + PROVIDED_CODE START---//
+	if (KeyManager::get()->isAsciiKeyPressed('a')) {
+		Camera::get()->strafeLeft();
+	}
+	if (xbox.PressedLeftDpad()) {
 		Camera::get()->strafeLeft();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('c') || xbox.PressedLeftShoulder()) {
+	if (KeyManager::get()->isAsciiKeyPressed('c')) {
+		Camera::get()->strafeDown();
+	}
+	if (xbox.PressedLeftShoulder()) {
 		Camera::get()->strafeDown();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('d') || xbox.PressedRightDpad()) {
+	if (KeyManager::get()->isAsciiKeyPressed('d')) {
+		Camera::get()->strafeRight();
+	}
+	if (xbox.PressedRightDpad()) {
 		Camera::get()->strafeRight();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('s') || xbox.PressedDownDpad()) {
+	if (KeyManager::get()->isAsciiKeyPressed('s')) {
+		Camera::get()->moveBackward();
+	}
+	if (xbox.PressedDownDpad()) {
 		Camera::get()->moveBackward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed('w') || xbox.PressedUpDpad()) {
+	if (KeyManager::get()->isAsciiKeyPressed('w')) {
+		Camera::get()->moveForward();
+	}
+	if (xbox.PressedUpDpad()) {
 		Camera::get()->moveForward();
 	}
 
-	if (KeyManager::get()->isAsciiKeyPressed(' ') || xbox.PressedRightShoulder()) {
+	if (KeyManager::get()->isAsciiKeyPressed(' ')) {
+		Camera::get()->strafeUp();
+	}
+	if (xbox.PressedRightShoulder()) {
 		Camera::get()->strafeUp();
 	}
 	
@@ -327,6 +363,7 @@ void idle() {
 	if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN) || A == true) {
 		speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
 	}
+	//---OWN_CODE + PROVIDED_CODE END---//
 
 	// attempt to do data communications every 4 frames if we've created a local vehicle
 	if (frameCounter % 4 == 0 && vehicle != NULL) {
@@ -354,6 +391,14 @@ void idle() {
 					//
 					// student code goes here
 					//
+
+					//=======================================//
+					//Push all the shapes detail			 //
+					//into the shapeinit vector				 //
+					//and send it as M message to the server //
+					//=======================================//
+
+					//---OWN_CODE_START---//
 
 					//============myCar_Copy
 					MyCar myCopy = MyCar::MyCar();
@@ -528,6 +573,7 @@ void idle() {
 					Wheel5.xyz[1] = 0.8;
 					Wheel5.xyz[2] = 0;
 					vm.shapes.push_back(Wheel5);
+					//---OWN_CODE_END---//
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -561,6 +607,12 @@ void idle() {
 					std::vector<VehicleModel> models = GetVehicleModels(msg.payload);
 					for (unsigned int i = 0; i < models.size(); i++) {
 						VehicleModel vm = models[i];
+
+						//===================================================//
+						//In this section, I had created a new class called	 //
+						//otherCar to store and draw each vehicle by using	 //
+						//the data recieved from the server.				 //
+						//===================================================//
 
 						// uncomment the line below to create remote vehicles
 						otherVehicles[vm.remoteID] = new OtherCar(vm);

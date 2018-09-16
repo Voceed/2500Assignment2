@@ -12,6 +12,7 @@ OtherCar::OtherCar(VehicleModel _vm) {
 void OtherCar::draw() {
 	vector<ShapeInit>::iterator shapeIt;
 
+	//---Draw different shape depends on the shape type---//
 	for (shapeIt = vm.shapes.begin(); shapeIt != vm.shapes.end(); shapeIt++) {
 		switch (shapeIt->type) {
 
